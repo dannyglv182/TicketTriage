@@ -6,8 +6,7 @@ A full-stack application that asses support tickets and priority.
 
 ## Overview
 
-This project allows a player to play a quick game of connect four against the computer through a simple frontend interface that interacts with the backend.
-
+This project allows a user to submit a suport ticket, where the OpenAI API then assigns priority and catigorizes the issue.
 The goal of this project was to strengthen my understanding of:
 - OpenAI API
 - REST APIs
