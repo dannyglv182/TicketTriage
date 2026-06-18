@@ -22,6 +22,7 @@ export default function App() {
       // Stores the ticket analysis and changes the state of result
       const data = await response.json();
       setResult(data);
+      console.log(data);
     } catch (err) {
       console.error("Error:", err);
     }

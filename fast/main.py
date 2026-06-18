@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,10 +23,10 @@ class Move(BaseModel):
     column: int
 
 class TicketRequest(BaseModel):
-    title: str
+    # title: str
     description: str
-    user_email: str
-    severity: str
+    # user_email: str
+    # severity: str
 
 @app.get("/")
 async def root():
@@ -38,14 +40,3 @@ async def analyzeTicket(ticket: TicketRequest):
         "team": "Backend",
         "summary": "Mock Response for testing."
     }
-
-# @app.post("/move")
-# def move_request(move: Move):
-#     row = move.row
-#     column = move.column
-#     board = run_game(row, column)
-#     # return {
-#     #     "row": row,
-#     #    "column": column
-#     # }
-#     return {"board": board} # Should return the state of the game 
