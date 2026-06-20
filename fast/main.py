@@ -21,15 +21,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class Move(BaseModel):
-    row: int
-    column: int
-
 class TicketRequest(BaseModel):
     # title: str
     description: str
     # user_email: str
     # severity: str
+
+class TicketResponse(BaseModel):
+    category: str
+    priority: str
+    team: str
+    summary: str
 
 @app.get("/")
 async def root():
@@ -37,9 +39,16 @@ async def root():
 
 @app.post("/analyze-ticket")
 async def analyzeTicket(ticket: TicketRequest):
-    return {
-        "category": "authentication",
-        "priority": "High",
-        "team": "Backend",
-        "summary": "Mock Response for testing."
-    }
+    triage = client.responses.parse(
+        model="gpt-5",
+        input=f""" Please analyze this support ticket
+        description: {ticket.description}
+        Determine:
+        - Category 
+        - Priority 
+        - Team 
+        - Summary
+        """,
+        text_format=TicketResponse
+    )
+    return triage.output_parsed
